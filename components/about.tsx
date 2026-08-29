@@ -3,7 +3,8 @@
 import { SectionHeading } from '@/components/hud'
 import { PROFILE, STATUS } from '@/lib/data'
 import { motion } from 'framer-motion'
-import { Github, Mail, MapPin, Phone, GraduationCap, Languages } from 'lucide-react'
+import { Mail, MapPin, Phone, GraduationCap, Languages } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 
 const rows = [
   { icon: MapPin, label: 'LOCATION', value: PROFILE.location },

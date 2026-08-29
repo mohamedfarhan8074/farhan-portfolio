@@ -4,7 +4,8 @@ import { SectionHeading } from '@/components/hud'
 import { MagneticButton } from '@/components/magnetic-button'
 import { PROFILE } from '@/lib/data'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CheckCircle2, Github, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 import { useState } from 'react'
 
 const channels = [

@@ -1,7 +1,8 @@
 'use client'
 
 import { PROFILE } from '@/lib/data'
-import { Github, Mail, Phone } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 
 export function Footer() {
   const links = [
