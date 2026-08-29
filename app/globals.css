@@ -1,0 +1,290 @@
+@import 'tailwindcss';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-gold: var(--gold);
+  --color-cyan: var(--cyan);
+  --color-metal: var(--metal);
+
+  --font-sans: var(--font-rajdhani), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-orbitron), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.5rem;
+
+  /* Deep metallic black base */
+  --background: oklch(0.13 0.008 25);
+  --foreground: oklch(0.93 0.01 70);
+
+  --card: oklch(0.17 0.01 25 / 60%);
+  --card-foreground: oklch(0.93 0.01 70);
+  --popover: oklch(0.15 0.01 25);
+  --popover-foreground: oklch(0.93 0.01 70);
+
+  /* Iron red */
+  --primary: oklch(0.58 0.21 27);
+  --primary-foreground: oklch(0.98 0.01 70);
+
+  --secondary: oklch(0.24 0.015 30);
+  --secondary-foreground: oklch(0.93 0.01 70);
+
+  --muted: oklch(0.22 0.01 30);
+  --muted-foreground: oklch(0.68 0.02 55);
+
+  --accent: oklch(0.24 0.02 30);
+  --accent-foreground: oklch(0.93 0.01 70);
+
+  --destructive: oklch(0.6 0.22 25);
+
+  --border: oklch(0.42 0.03 32 / 45%);
+  --input: oklch(0.3 0.02 30);
+  --ring: oklch(0.58 0.21 27);
+
+  /* Custom futuristic accents */
+  --gold: oklch(0.82 0.14 82);
+  --cyan: oklch(0.85 0.11 205);
+  --metal: oklch(0.55 0.015 40);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 45%, transparent);
+    color: var(--foreground);
+  }
+  /* Futuristic scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.1 0.006 25);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary), var(--gold));
+    border-radius: 999px;
+    border: 2px solid oklch(0.1 0.006 25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Futuristic utility layers ===== */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 8px color-mix(in oklch, var(--primary) 70%, transparent),
+      0 0 24px color-mix(in oklch, var(--primary) 40%, transparent);
+  }
+  .text-glow-gold {
+    text-shadow: 0 0 8px color-mix(in oklch, var(--gold) 70%, transparent),
+      0 0 22px color-mix(in oklch, var(--gold) 35%, transparent);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 8px color-mix(in oklch, var(--cyan) 75%, transparent);
+  }
+
+  .hud-panel {
+    background:
+      linear-gradient(180deg, oklch(0.2 0.012 28 / 55%), oklch(0.14 0.008 25 / 65%));
+    border: 1px solid color-mix(in oklch, var(--primary) 30%, var(--border));
+    backdrop-filter: blur(12px);
+    position: relative;
+  }
+  .hud-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--primary) 50%, transparent),
+      transparent 40%,
+      transparent 60%,
+      color-mix(in oklch, var(--gold) 35%, transparent)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .corner-brackets::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background:
+      linear-gradient(var(--primary), var(--primary)) top left / 14px 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) top left / 2px 14px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) top right / 14px 2px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) top right / 2px 14px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) bottom left / 14px 2px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) bottom left / 2px 14px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) bottom right / 14px 2px no-repeat,
+      linear-gradient(var(--primary), var(--primary)) bottom right / 2px 14px no-repeat;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--primary) 8%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklch, var(--primary) 8%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .metal-text {
+    background: linear-gradient(
+      180deg,
+      oklch(0.98 0.01 80) 0%,
+      var(--gold) 45%,
+      oklch(0.6 0.08 60) 70%,
+      var(--gold) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scanline-mask {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0.9 0.02 70 / 3%) 3px,
+      transparent 4px
+    );
+  }
+}
+
+/* ===== Keyframes ===== */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes core-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@keyframes scan-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.4;
+  }
+  96% {
+    opacity: 1;
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+.animate-spin-reverse {
+  animation: spin-reverse 24s linear infinite;
+}
+.animate-core-pulse {
+  animation: core-pulse 3.2s ease-in-out infinite;
+}
+.animate-flicker {
+  animation: flicker 6s linear infinite;
+}
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
